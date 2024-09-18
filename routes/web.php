@@ -15,9 +15,10 @@ use App\Http\Controllers\VendorPanel\VendorController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::get('/', function () {
+        return view('welcome');
+    });
+   
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,9 +33,9 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::middleware(['auth','role:admin'])->group(function () {
-Route::get('admin/dashboard',[AdminController::class, 'index']);
+Route::get('admin/dashboard',[AdminController::class, 'index'])->name('admin.dashboard');
 });
 
 Route::middleware(['auth','role:vendor'])->group(function () {
-    Route::get('vendor/dashboard',[VendorController::class, 'index']);
+    Route::get('vendor/dashboard',[VendorController::class, 'index'])->name('vendor.dashboard');
     });
